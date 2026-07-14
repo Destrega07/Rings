@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.taro-cache/
+.swc/
+临时文件/
+项目重要文档/
+指令集/
+*.zip
+*.tar.gz
+*.mp4
+.git/
+.gitignore
+.env
