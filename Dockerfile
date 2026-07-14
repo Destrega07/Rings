@@ -1,5 +1,5 @@
-# Stage 1: Build H5
-FROM node:18-alpine AS builder
+# Stage 1: Build H5 (use Debian-slim, not Alpine, for Taro native bindings compatibility)
+FROM node:18-slim AS builder
 WORKDIR /app
 COPY package.json package-lock.json .npmrc ./
 RUN npm install --legacy-peer-deps
