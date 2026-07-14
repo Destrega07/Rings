@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.taro-cache/
+
+# Non-code folders (exclude from repo)
+临时文件/
+项目重要文档/
+指令集/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# Archives
+*.zip
+*.tar.gz
+
+# Private config
+project.private.config.json
+
+# Misc
+*.mp4

@@ -1,0 +1,133 @@
+@use '@/styles/compat.scss';
+@use '@/styles/variables.scss' as *;
+
+// 全局样式
+page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB',
+    sans-serif;
+  font-size: $font-size-md;
+  line-height: $line-height-normal;
+  color: $color-text-primary;
+  // 米白纸底 + 极淡木纹
+  background-color: $color-bg-page;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(184, 134, 92, 0.04) 0, transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(140, 98, 57, 0.04) 0, transparent 40%);
+}
+
+// ============ H5 Demo：PC 浏览器手机壳容器 ============
+// 仅 H5 环境生效；PC 浏览器（>500px）以 375×812 居中呈现手机外壳质感
+// 移动端浏览器（<500px）全屏铺满，不套手机壳
+@media screen and (min-width: 500px) {
+  // PC 浏览器下 html font-size 由 src/index.html 锁定为 37.5px（与 designWidth=750 配合）
+  // 这里 !important 作为双保险，防止 Taro 运行时脚本在 PC 宽屏下把 html font-size 推到 40px 上限
+  html {
+    font-size: 37.5px !important;
+  }
+
+  body {
+    margin: 0;
+    background: #f0f0f0;
+  }
+
+  // Taro router wraps #app in: taro-tabbar__container > taro-tabbar__panel + taro-tabbar__tabbar
+  // The tabbar is a SIBLING of the panel (outside phoneWrapper), so it escapes the phone shell.
+  // Fix: make the container itself the phone shell, so the tabbar sits inside it.
+  .taro-tabbar__container {
+    width: 375px !important;
+    height: 812px !important;
+    margin: 30px auto !important;
+    border: 12px solid #333 !important;
+    border-radius: 40px !important;
+    box-shadow: 0 20px 40px rgba(0, 0,  0, 0.15) !important;
+    background: #fff !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  .taro-tabbar__panel {
+    overflow: hidden !important;
+  }
+
+  // phoneWrapper: transparent inner wrapper (phone shell styling is on the container)
+  .phoneWrapper {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    position: relative;
+    overflow: hidden;
+
+    // Taro H5 页面根容器：绝对定位锁死在手机壳内，整体不滚动（交由内部 ScrollView 滚动）
+    .taro_page {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 100% !important;
+      overflow: hidden;
+    }
+
+    // 核心平替网关：在手机壳内，将所有页面的 fixed 底部条修正为 absolute 锁死
+    [class*="bottomBar"],
+    [class*="actions"],
+    [class*="inputArea"] {
+      position: absolute !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      z-index: 999 !important;
+    }
+
+    // 全屏遮罩与浮动工具栏：fixed → absolute，锁定在手机壳内（保留原有 top/right/bottom/left 偏移）
+    [class*="envMask"],
+    [class*="reviewToolbar"],
+    [class*="mask"] {
+      position: absolute !important;
+    }
+
+    // 顶部刘海装饰
+    .phoneShellDecor {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 22px;
+      background: #333;
+      border-bottom-left-radius: 14px;
+      border-bottom-right-radius: 14px;
+      z-index: 9998;
+      pointer-events: none;
+    }
+  }
+
+  // 确保内部所有文本继承手机壳容器的基准视口字号，终结移动端浏览器的字号自动放大惩罚
+  .phoneWrapper * {
+    max-height: 999999px;
+  }
+}
+
+@media screen and (max-width: 499px) {
+  .phoneWrapper {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    .taro_page {
+      height: 100%;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .phoneShellDecor {
+      display: none;
+    }
+  }
+}

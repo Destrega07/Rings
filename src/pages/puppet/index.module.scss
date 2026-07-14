@@ -1,0 +1,286 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  padding: $page-padding;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-semibold;
+  color: $color-primary-dark;
+  margin: 24rpx 0 8rpx;
+  letter-spacing: 4rpx;
+}
+
+.subtitle {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  margin-bottom: 24rpx;
+}
+
+/* 纯 CSS 木偶替身 */
+.puppet {
+  position: relative;
+  width: 240rpx;
+  height: 320rpx;
+  margin: 32rpx 0;
+  animation: idle 3s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+@keyframes idle {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50%      { transform: translateY(-6rpx) rotate(1deg); }
+}
+
+.puppetShaking {
+  animation: shake 600ms $transition-base;
+}
+
+@keyframes shake {
+  0%   { transform: translateX(0) rotate(0); }
+  15%  { transform: translateX(-20rpx) rotate(-8deg); }
+  30%  { transform: translateX(20rpx) rotate(8deg); }
+  45%  { transform: translateX(-16rpx) rotate(-6deg); }
+  60%  { transform: translateX(16rpx) rotate(6deg); }
+  75%  { transform: translateX(-8rpx) rotate(-3deg); }
+  100% { transform: translateX(0) rotate(0); }
+}
+
+.head {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160rpx;
+  height: 160rpx;
+  background: linear-gradient(180deg, #E8C9A0 0%, #D4A574 100%);
+  border-radius: 50%;
+  border: 3rpx solid $color-primary-dark;
+  box-shadow: inset -8rpx -8rpx 16rpx rgba(140, 98, 57, 0.2);
+}
+
+.eye {
+  position: absolute;
+  top: 60rpx;
+  width: 16rpx;
+  height: 16rpx;
+  background: $color-wood-deep;
+  border-radius: 50%;
+}
+
+.eyeLeft { left: 40rpx; }
+.eyeRight { right: 40rpx; }
+
+.puppetShaking .eye {
+  height: 4rpx;
+  border-radius: 0;
+  top: 68rpx;
+}
+
+.mouth {
+  position: absolute;
+  bottom: 32rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 24rpx;
+  border-bottom: 4rpx solid $color-wood-deep;
+  border-radius: 0 0 60rpx 60rpx;
+}
+
+.puppetShaking .mouth {
+  width: 36rpx;
+  height: 36rpx;
+  border: 4rpx solid $color-wood-deep;
+  border-radius: 50%;
+  bottom: 24rpx;
+}
+
+.blush {
+  position: absolute;
+  top: 96rpx;
+  width: 20rpx;
+  height: 12rpx;
+  background: rgba(212, 146, 92, 0.4);
+  border-radius: 50%;
+}
+
+.blushLeft { left: 24rpx; }
+.blushRight { right: 24rpx; }
+
+.body {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200rpx;
+  height: 180rpx;
+  background: linear-gradient(180deg, #B8865C 0%, #8C6239 100%);
+  border-radius: 60rpx 60rpx 20rpx 20rpx;
+  border: 3rpx solid $color-primary-dark;
+}
+
+.patch {
+  position: absolute;
+  width: 24rpx;
+  height: 24rpx;
+  background: $color-wood-glow;
+  border: 2rpx solid $color-wood-deep;
+  border-radius: 4rpx;
+}
+
+.patch1 { top: 80rpx; left: 30rpx; }
+.patch2 { bottom: 30rpx; right: 40rpx; }
+
+/* 输入区 */
+.inputCard {
+  width: 100%;
+  max-width: $max-content-width;
+  background: $color-bg-card;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-lg;
+  padding: 24rpx;
+  margin: 24rpx 0;
+  box-shadow: $shadow-card;
+}
+
+.inputLabel {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-bottom: 12rpx;
+}
+
+.inputBox {
+  width: 100%;
+  min-height: 120rpx;
+  background: $color-bg-page;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-sm;
+  padding: 16rpx;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  box-sizing: border-box;
+  transition: opacity 220ms cubic-bezier(0.22, 0.61, 0.36, 1), transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.pokeBtn {
+  @include button-reset;
+  width: 100%;
+  height: $button-height-md;
+  background: linear-gradient(135deg, $color-warning 0%, #C97A47 100%);
+  border-radius: $radius-button;
+  color: $color-text-white;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  margin-top: 16rpx;
+  transition: opacity 200ms cubic-bezier(0.22, 0.61, 0.36, 1), transform 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  &:active { opacity: 0.9; transform: scale(0.98); }
+}
+
+.pokeBtnBusy {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* 木偶替身代答气泡 */
+.replyBox {
+  width: 100%;
+  max-width: $max-content-width;
+  background: $color-bg-warm;
+  border: 2rpx solid rgba(184, 134, 92, 0.2);
+  border-radius: $radius-lg;
+  padding: 24rpx;
+  margin-top: 16rpx;
+  min-height: 80rpx;
+  display: flex;
+  gap: 16rpx;
+  align-items: flex-start;
+}
+
+.replyAvatar {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: radial-gradient(circle, $color-wood-glow 0%, $color-primary 100%);
+  border: 2rpx solid $color-primary-dark;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-md;
+  color: $color-wood-deep;
+  font-weight: $font-weight-semibold;
+  flex-shrink: 0;
+  box-shadow: inset -2rpx -2rpx 6rpx rgba(140, 98, 57, 0.25);
+}
+
+.replyText {
+  flex: 1;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  line-height: $line-height-loose;
+}
+
+.replyLoading {
+  color: $color-text-tertiary;
+  font-style: italic;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.replyCursor {
+  color: $color-primary;
+  animation: blink 0.8s steps(2) infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50%      { opacity: 1; }
+}
+
+/* 小木牌浮层：挂在木偶头像右上方，作为看真心话的入口 */
+.woodSignFloat {
+  position: absolute;
+  top: -20rpx;
+  right: -120rpx;
+  width: 200rpx;
+  padding: 14rpx 16rpx;
+  background: rgba(255, 252, 245, 0.85);
+  backdrop-filter: blur(8rpx);
+  border: 2rpx solid $color-wood-glow;
+  border-radius: $radius-sm;
+  box-shadow: 0 4rpx 16rpx rgba(140, 98, 57, 0.18);
+  font-size: $font-size-xs;
+  color: $color-primary-dark;
+  font-weight: $font-weight-medium;
+  text-align: center;
+  line-height: 1.4;
+  animation: woodSignFadeIn 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  z-index: 10;
+
+  &:active { opacity: 0.8; transform: scale(0.97); }
+}
+
+@keyframes woodSignFadeIn {
+  from { opacity: 0; transform: translateY(-8rpx) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.back {
+  @include button-reset;
+  margin-top: 16rpx;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  background: transparent;
+  height: $button-height-sm;
+}

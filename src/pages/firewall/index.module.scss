@@ -1,0 +1,161 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  padding: $page-padding;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hint {
+  margin-top: 32rpx;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  padding: 8rpx 24rpx;
+  background: rgba(60, 40, 23, 0.04);
+  border-radius: $radius-button;
+}
+
+.title {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-semibold;
+  color: $color-primary-dark;
+  margin: 24rpx 0;
+  letter-spacing: 4rpx;
+}
+
+/* 虚掩木门 */
+.door {
+  position: relative;
+  width: 360rpx;
+  height: 480rpx;
+  margin: 32rpx 0;
+}
+
+.doorPanel {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 12rpx,
+      rgba(92, 61, 30, 0.08) 12rpx,
+      rgba(92, 61, 30, 0.08) 14rpx
+    ),
+    linear-gradient(180deg, #B8865C 0%, #9A6B43 50%, #8C6239 100%);
+  border-radius: $radius-sm;
+  box-shadow:
+    inset 0 0 0 3rpx rgba(92, 61, 30, 0.3),
+    inset 0 2rpx 0 rgba(255, 220, 180, 0.3),
+    0 16rpx 36rpx -12rpx rgba(92, 61, 30, 0.5);
+}
+
+.doorLeft {
+  left: 0;
+  transform-origin: left center;
+  transform: rotateY(-8deg);
+}
+
+.doorRight {
+  right: 0;
+  transform-origin: right center;
+  transform: rotateY(8deg);
+}
+
+.doorGlow {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24rpx;
+  height: 60%;
+  background: linear-gradient(180deg, transparent, $color-wood-glow, transparent);
+  filter: blur(8rpx);
+  opacity: 0.7;
+}
+
+.doorKnob {
+  position: absolute;
+  top: 50%;
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  background: radial-gradient(circle, #FFD78E, #8C6239);
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.3);
+}
+
+.doorKnobLeft { left: calc(50% - 20rpx); }
+.doorKnobRight { right: calc(50% - 20rpx); }
+
+.lead {
+  text-align: center;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  line-height: $line-height-loose;
+  margin: 24rpx 0 32rpx;
+  padding: 0 24rpx;
+}
+
+.leadHighlight {
+  color: $color-primary-dark;
+  font-weight: $font-weight-semibold;
+}
+
+/* 分流按钮 */
+.actions {
+  width: 100%;
+  max-width: $max-content-width;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+
+.btnWarm {
+  @include button-reset;
+  width: 100%;
+  height: $button-height-lg;
+  background: linear-gradient(135deg, $color-warning 0%, #C97A47 100%);
+  border-radius: $radius-button;
+  color: $color-text-white;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  box-shadow: 0 6rpx 20rpx rgba(212, 146, 92, 0.35);
+
+  &:active { opacity: 0.9; transform: scale(0.98); }
+}
+
+.btnGhost {
+  @include button-reset;
+  width: 100%;
+  height: $button-height-lg;
+  background: transparent;
+  border: 2rpx solid $color-primary;
+  border-radius: $radius-button;
+  color: $color-primary-dark;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+
+  &:active { background: $color-bg-warm; }
+}
+
+.back {
+  @include button-reset;
+  margin-top: 24rpx;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  background: transparent;
+  height: $button-height-sm;
+}
+
+.empty {
+  margin-top: 80rpx;
+  text-align: center;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  line-height: $line-height-loose;
+}

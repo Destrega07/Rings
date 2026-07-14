@@ -1,0 +1,41 @@
+@use '@/styles/variables.scss' as *;
+
+.ringWrap {
+  position: relative;
+  margin: 0 auto;
+  transition: transform $transition-slow ease;
+}
+
+.ring1, .ring2, .ring3, .ring4, .ring5, .core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2rpx solid rgba(140, 98, 57, 0.35);
+}
+
+.ring1 { width: 100%; height: 100%; border-color: rgba(140, 98, 57, 0.18); }
+.ring2 { width: 82%; height: 82%; border-color: rgba(140, 98, 57, 0.25); }
+.ring3 { width: 64%; height: 64%; border-color: rgba(140, 98, 57, 0.32); }
+.ring4 { width: 46%; height: 46%; border-color: rgba(140, 98, 57, 0.4); }
+.ring5 { width: 30%; height: 30%; border-color: rgba(140, 98, 57, 0.5); }
+
+.core {
+  width: 16%;
+  height: 16%;
+  border: none;
+  background: radial-gradient(circle, $color-wood-glow 0%, $color-primary 70%, $color-primary-dark 100%);
+  box-shadow: 0 0 24rpx rgba(255, 215, 142, 0.6);
+}
+
+.finale {
+  transform: scale(1.18);
+  .core {
+    background: radial-gradient(circle, #FFFFFF 0%, $color-wood-glow 50%, $color-primary 100%);
+    box-shadow: 0 0 48rpx rgba(255, 215, 142, 0.9);
+  }
+  .ring1, .ring2, .ring3, .ring4, .ring5 {
+    border-color: rgba(255, 215, 142, 0.6);
+  }
+}

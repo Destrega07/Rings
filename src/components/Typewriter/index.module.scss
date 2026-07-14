@@ -1,0 +1,20 @@
+@use '@/styles/variables.scss' as *;
+
+.wrap {
+  display: inline;
+  font-size: $font-size-md;
+  line-height: $line-height-loose;
+  color: $color-text-primary;
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 4rpx;
+  color: $color-primary;
+  animation: blink 0.8s steps(2) infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}

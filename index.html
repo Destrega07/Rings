@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>年轮 · 给爱情一圈年轮</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 氛围层：木质纹理 + 暖光晕 + 漂浮微尘 -->
+    <div class="ambient" aria-hidden="true">
+        <div class="ambient__grain"></div>
+        <div class="ambient__glow ambient__glow--top"></div>
+        <div class="ambient__glow ambient__glow--bottom"></div>
+        <div class="dust" id="dust"></div>
+    </div>
+
+    <!-- 顶部品牌锚点 -->
+    <header class="brand">
+        <span class="brand__mark" aria-hidden="true">
+            <span class="brand__ring"></span>
+            <span class="brand__ring"></span>
+            <span class="brand__ring"></span>
+        </span>
+        <span class="brand__name">年 轮</span>
+    </header>
+
+    <!-- 进度指示 -->
+    <nav class="progress" aria-label="步骤进度">
+        <span class="progress__dot progress__dot--active" data-step="1"></span>
+        <span class="progress__line"></span>
+        <span class="progress__dot" data-step="2"></span>
+        <span class="progress__line"></span>
+        <span class="progress__dot" data-step="3"></span>
+        <span class="progress__line"></span>
+        <span class="progress__dot" data-step="4"></span>
+    </nav>
+
+    <!-- Wizard 主容器 -->
+    <main class="wizard" aria-live="polite">
+        <div class="wizard__track" id="track">
+
+            <!-- ============ 第一步：情绪命名沙盒 ============ -->
+            <section class="step step--1" aria-labelledby="step1-title">
+                <div class="step__ring" aria-hidden="true">
+                    <span class="ring ring--1"></span>
+                    <span class="ring ring--2"></span>
+                    <span class="ring ring--3"></span>
+                    <span class="ring ring--4"></span>
+                    <span class="ring ring--core"></span>
+                </div>
+
+                <h1 class="step__title" id="step1-title">
+                    深夜了，给爱情一圈年轮
+                </h1>
+                <p class="step__lead">
+                    现在觉得委屈，或者还有火气吗？<br>
+                    别慌，把它们先放在这里。
+                </p>
+
+                <!-- 情绪卡片墙 -->
+                <div class="emotions" role="group" aria-label="选择此刻的情绪">
+                    <button class="emotion" type="button" data-emotion="委屈">
+                        <span class="emotion__glyph" aria-hidden="true">委屈</span>
+                        <span class="emotion__hint">心里闷闷的酸</span>
+                    </button>
+                    <button class="emotion" type="button" data-emotion="愤怒">
+                        <span class="emotion__glyph" aria-hidden="true">愤怒</span>
+                        <span class="emotion__hint">胸口烧着一团火</span>
+                    </button>
+                    <button class="emotion" type="button" data-emotion="被忽略">
+                        <span class="emotion__glyph" aria-hidden="true">被忽略</span>
+                        <span class="emotion__hint">像被世界遗忘</span>
+                    </button>
+                    <button class="emotion" type="button" data-emotion="焦虑">
+                        <span class="emotion__glyph" aria-hidden="true">焦虑</span>
+                        <span class="emotion__hint">心悬在半空</span>
+                    </button>
+                </div>
+
+                <!-- 原始语料输入 -->
+                <div class="field">
+                    <label class="field__label" for="rawWords">把刚才那句话，原样放在这里</label>
+                    <textarea
+                        id="rawWords"
+                        class="field__input"
+                        rows="3"
+                        placeholder="例如：你总是把家当旅馆！">你总是把家当旅馆！</textarea>
+                </div>
+
+                <!-- 注入年轮 -->
+                <button class="cta" id="injectBtn" type="button" disabled>
+                    <span class="cta__label">注入年轮</span>
+                    <span class="cta__arrow" aria-hidden="true">→</span>
+                </button>
+
+                <p class="step__footnote">所有文字只留在你的手机里，不经过任何云端。</p>
+            </section>
+
+            <!-- ============ 第二步：冰山拆解向导 ============ -->
+            <section class="step step--2" aria-labelledby="step2-title">
+                <div class="step__ring step__ring--grown" aria-hidden="true">
+                    <span class="ring ring--1"></span>
+                    <span class="ring ring--2"></span>
+                    <span class="ring ring--3"></span>
+                    <span class="ring ring--4"></span>
+                    <span class="ring ring--5"></span>
+                    <span class="ring ring--core"></span>
+                </div>
+
+                <h2 class="step__title step__title--sub" id="step2-title">
+                    年轮，正在缓缓生长
+                </h2>
+                <p class="step__lead">
+                    Ta 的【木偶替身】已经把刚才的攻击挡下。<br>
+                    其实，愤怒的背后，通常藏着一个没被满足的期待。<br>
+                    让【心晴】陪你找出来。
+                </p>
+
+                <!-- 冰山拆解向导层（双视图：答题区 / NVC转译区） -->
+                <div class="iceberg" id="iceberg">
+
+                    <!-- 视图 A：答题区 -->
+                    <div class="iceberg__view iceberg__view--quiz" id="quizView">
+                        <div class="iceberg__card">
+                            <span class="iceberg__tag">冰山之下 · 渴望挖掘</span>
+                            <p class="iceberg__question">
+                                当你说出<span class="quote" id="rawEcho">「你总是把家当旅馆！」</span>时，<br>
+                                你真正的渴望是？
+                            </p>
+
+                            <div class="options" id="options" role="group" aria-label="选择你真正的渴望">
+                                <!-- 选项由 JS 根据情绪动态渲染 -->
+                            </div>
+
+                            <button class="gold" id="distillBtn" type="button" disabled>
+                                <span class="gold__label">提 炼 真 心 话</span>
+                                <span class="gold__spark" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 视图 B：NVC 结构化转译卡片 -->
+                    <div class="iceberg__view iceberg__view--nvc" id="nvcView" aria-hidden="true">
+                        <div class="nvc-card">
+                            <span class="nvc-card__seal">真 心 话</span>
+
+                            <div class="nvc-field" data-key="observation">
+                                <span class="nvc-field__label">我 的 观 察</span>
+                                <p class="nvc-field__text" id="nvcObservation"></p>
+                            </div>
+                            <div class="nvc-field" data-key="feeling">
+                                <span class="nvc-field__label">我 的 感 受</span>
+                                <p class="nvc-field__text" id="nvcFeeling"></p>
+                            </div>
+                            <div class="nvc-field" data-key="need">
+                                <span class="nvc-field__label">我 的 需 求</span>
+                                <p class="nvc-field__text" id="nvcNeed"></p>
+                            </div>
+                            <div class="nvc-field" data-key="request">
+                                <span class="nvc-field__label">我 的 请 求</span>
+                                <p class="nvc-field__text" id="nvcRequest"></p>
+                            </div>
+
+                            <div class="nvc-card__actions">
+                                <button class="action action--primary" id="sendCardBtn" type="button">
+                                    生成破冰微信小卡片
+                                </button>
+                                <button class="action action--ghost" id="saveLocalBtn" type="button">
+                                    留在本地，存为年轮日记
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="back" id="backBtn" type="button">← 回到上一圈</button>
+
+                <!-- Mock 成功轻提示 -->
+                <div class="toast" id="toast" role="status" aria-live="polite"></div>
+            </section>
+
+            <!-- ============ 第三步：B端 · 情绪防火墙（木门） ============ -->
+            <section class="step step--3" aria-labelledby="step3-title">
+                <div class="step__ring step__ring--grown" aria-hidden="true">
+                    <span class="ring ring--1"></span>
+                    <span class="ring ring--2"></span>
+                    <span class="ring ring--3"></span>
+                    <span class="ring ring--4"></span>
+                    <span class="ring ring--5"></span>
+                    <span class="ring ring--core"></span>
+                </div>
+
+                <span class="view-hint">模拟 B 点开微信卡片后的体验</span>
+
+                <h2 class="step__title step__title--sub" id="step3-title">
+                    情绪防火墙
+                </h2>
+
+                <!-- 虚掩的原木门 -->
+                <div class="door" aria-hidden="true">
+                    <div class="door__panel door__panel--left"></div>
+                    <div class="door__panel door__panel--right"></div>
+                    <div class="door__crack"></div>
+                    <div class="door__glow"></div>
+                    <div class="door__knob"></div>
+                </div>
+
+                <p class="step__lead step__lead--door">
+                    Ta 已经为你种下了一圈和解的年轮。<br>
+                    但在看 Ta 的真心话之前，<br>
+                    你心里是不是还有火气或苦水想一吐而快？
+                </p>
+
+                <div class="door-actions">
+                    <button class="action action--warm" id="stillAngryBtn" type="button">
+                        是的，我还气着 / 委屈呢
+                    </button>
+                    <button class="action action--ghost" id="calmDownBtn" type="button">
+                        其实，我也冷静下来了
+                    </button>
+                </div>
+
+                <button class="back" id="backBtn3" type="button">← 回到上一圈</button>
+            </section>
+
+            <!-- ============ 第四步：B端 · 木偶替身宣泄 + NVC 重现 + 终点分流 ============ -->
+            <section class="step step--4" aria-labelledby="step4-title">
+                <div class="step__ring step__ring--grown step__ring--final" aria-hidden="true">
+                    <span class="ring ring--1"></span>
+                    <span class="ring ring--2"></span>
+                    <span class="ring ring--3"></span>
+                    <span class="ring ring--4"></span>
+                    <span class="ring ring--5"></span>
+                    <span class="ring ring--6"></span>
+                    <span class="ring ring--core"></span>
+                </div>
+
+                <h2 class="step__title step__title--sub" id="step4-title">
+                    木偶替身
+                </h2>
+
+                <!-- 双视图：木偶宣泄区 / NVC 重现区 -->
+                <div class="b-stage" id="bStage">
+
+                    <!-- 视图 A：木偶替身宣泄 -->
+                    <div class="b-stage__view b-stage__view--puppet" id="puppetView">
+                        <div class="puppet" id="puppet" aria-hidden="true">
+                            <div class="puppet__head">
+                                <span class="puppet__eye puppet__eye--left"></span>
+                                <span class="puppet__eye puppet__eye--right"></span>
+                                <span class="puppet__mouth"></span>
+                                <span class="puppet__cheek puppet__cheek--left"></span>
+                                <span class="puppet__cheek puppet__cheek--right"></span>
+                            </div>
+                            <div class="puppet__body">
+                                <span class="puppet__arm puppet__arm--left"></span>
+                                <span class="puppet__arm puppet__arm--right"></span>
+                                <span class="puppet__patch puppet__patch--1"></span>
+                                <span class="puppet__patch puppet__patch--2"></span>
+                            </div>
+                        </div>
+
+                        <p class="puppet__hint">
+                            这是 A 留在你这里的木偶替身。<br>
+                            现在你可以用任何话骂它，或者戳它、倾诉委屈。<br>
+                            它会无条件承受。
+                        </p>
+
+                        <div class="puppet__input-wrap">
+                            <textarea
+                                id="puppetInput"
+                                class="field__input field__input--puppet"
+                                rows="2"
+                                placeholder="把憋着的话，狠狠丢给它…"></textarea>
+                            <button class="puppet__poke" id="pokeBtn" type="button">
+                                对木偶替身碎碎念 / 戳一戳
+                            </button>
+                        </div>
+
+                        <div class="puppet__reply" id="puppetReply" aria-live="polite"></div>
+
+                        <button class="action action--warm action--reveal" id="revealBtn" type="button" disabled>
+                            气消了一点点，去看 Ta 的真心话
+                        </button>
+                    </div>
+
+                    <!-- 视图 B：NVC 真心话重现 + 终点分流 -->
+                    <div class="b-stage__view b-stage__view--finale" id="finaleView" aria-hidden="true">
+                        <p class="finale__lead">
+                            气消了一点点吗？<br>
+                            来看看 A 真正想对你说的、被藏起来的委屈吧。
+                        </p>
+
+                        <div class="nvc-card nvc-card--b">
+                            <span class="nvc-card__seal">真 心 话</span>
+                            <div class="nvc-field" data-key="observation">
+                                <span class="nvc-field__label">我 的 观 察</span>
+                                <p class="nvc-field__text" id="bNvcObservation"></p>
+                            </div>
+                            <div class="nvc-field" data-key="feeling">
+                                <span class="nvc-field__label">我 的 感 受</span>
+                                <p class="nvc-field__text" id="bNvcFeeling"></p>
+                            </div>
+                            <div class="nvc-field" data-key="need">
+                                <span class="nvc-field__label">我 的 需 求</span>
+                                <p class="nvc-field__text" id="bNvcNeed"></p>
+                            </div>
+                            <div class="nvc-field" data-key="request">
+                                <span class="nvc-field__label">我 的 请 求</span>
+                                <p class="nvc-field__text" id="bNvcRequest"></p>
+                            </div>
+                        </div>
+
+                        <div class="finale__actions">
+                            <button class="action action--primary" id="onlineChatBtn" type="button">
+                                线上聊：开启心晴支招服务
+                            </button>
+                            <button class="action action--ghost" id="offlineChatBtn" type="button">
+                                线下聊：直接去现实中抱抱 Ta
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="back" id="backBtn4" type="button">← 回到木门</button>
+
+                <!-- 终极年轮发光层 -->
+                <div class="final-glow" id="finalGlow" aria-hidden="true"></div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

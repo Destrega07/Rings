@@ -1,0 +1,155 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  padding: $page-padding;
+}
+
+.header {
+  text-align: center;
+  margin: 32rpx 0;
+}
+
+.avatar {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+  background: radial-gradient(circle, $color-wood-glow 0%, $color-primary 100%);
+  margin: 0 auto 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-xl;
+  color: $color-wood-deep;
+  font-weight: $font-weight-semibold;
+  box-shadow: 0 6rpx 20rpx rgba(255, 215, 142, 0.4);
+}
+
+.name {
+  display: block;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-primary-dark;
+}
+
+.pair {
+  display: block;
+  margin-top: 8rpx;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.section {
+  margin-top: 32rpx;
+}
+
+.sectionTitle {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  margin-bottom: 12rpx;
+  letter-spacing: 2rpx;
+}
+
+.card {
+  background: $color-bg-card;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-lg;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: $shadow-card;
+}
+
+.cardRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12rpx 0;
+  border-bottom: 2rpx solid $color-divider;
+
+  &:last-child { border-bottom: none; }
+}
+
+.cardLabel {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+}
+
+.cardValue {
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.cardAction {
+  font-size: $font-size-md;
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+
+  &:active { opacity: 0.6; }
+}
+
+.migrateHint {
+  display: block;
+  margin-top: 12rpx;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  line-height: $line-height-loose;
+}
+
+.privacyCard {
+  background: linear-gradient(135deg, $color-bg-warm 0%, $color-bg-card 100%);
+  border: 2rpx solid rgba(184, 134, 92, 0.2);
+  border-radius: $radius-lg;
+  padding: 32rpx 24rpx;
+  margin-top: 16rpx;
+}
+
+.privacyTitle {
+  display: block;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-primary-dark;
+  margin-bottom: 12rpx;
+}
+
+.privacyText {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+  margin-bottom: 8rpx;
+}
+
+.testMode {
+  margin-top: 24rpx;
+  padding: 16rpx 24rpx;
+  background: rgba(212, 146, 92, 0.08);
+  border: 2rpx dashed $color-warning;
+  border-radius: $radius-button;
+  font-size: $font-size-xs;
+  color: $color-warning;
+  text-align: center;
+}
+
+.btn {
+  @include button-reset;
+  width: 100%;
+  height: $button-height-md;
+  background: transparent;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-button;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  margin-top: 16rpx;
+
+  &:active { background: $color-bg-hover; }
+}
+
+.footer {
+  margin-top: 48rpx;
+  text-align: center;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  line-height: $line-height-loose;
+}

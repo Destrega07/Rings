@@ -1,0 +1,63 @@
+@use '@/styles/variables.scss' as *;
+
+.bar {
+  position: fixed;
+  left: $page-padding;
+  right: $page-padding;
+  bottom: 32rpx;
+  z-index: 999;
+  background: linear-gradient(135deg, rgba(60, 40, 23, 0.96), rgba(92, 61, 30, 0.96));
+  border: 2rpx dashed $color-wood-glow;
+  border-radius: $radius-lg;
+  padding: 24rpx;
+  box-shadow: $shadow-popup;
+  animation: slideUp 0.4s $transition-base;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(120%); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.body {
+  margin-bottom: 16rpx;
+}
+
+.title {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-wood-glow;
+  font-weight: $font-weight-semibold;
+  margin-bottom: 8rpx;
+}
+
+.desc {
+  display: block;
+  font-size: $font-size-xs;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: $line-height-normal;
+  margin-top: 4rpx;
+}
+
+.btn {
+  @include button-reset;
+  width: 100%;
+  height: $button-height-sm;
+  background: $color-wood-glow;
+  border-radius: $radius-button;
+  color: $color-wood-deep;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  margin-top: 12rpx;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.btnText {
+  color: $color-wood-deep;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+}

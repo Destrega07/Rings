@@ -1,0 +1,90 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  padding: $page-padding;
+}
+
+.header {
+  text-align: center;
+  margin: 24rpx 0 32rpx;
+}
+
+.title {
+  display: block;
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-semibold;
+  color: $color-primary-dark;
+  letter-spacing: 8rpx;
+}
+
+.subtitle {
+  display: block;
+  margin-top: 12rpx;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  line-height: $line-height-loose;
+}
+
+.ringPreview {
+  display: flex;
+  justify-content: center;
+  margin: 24rpx 0;
+}
+
+.timeline {
+  margin-top: 16rpx;
+}
+
+.timelineItem {
+  display: flex;
+  gap: 16rpx;
+  padding: 24rpx 0;
+  border-bottom: 2rpx solid $color-divider;
+
+  &:last-child { border-bottom: none; }
+}
+
+.timelineDot {
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+  flex-shrink: 0;
+  margin-top: 4rpx;
+  box-shadow: 0 2rpx 8rpx rgba(140, 98, 57, 0.3);
+}
+
+.timelineBody {
+  flex: 1;
+}
+
+.timelineTitle {
+  display: block;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: 4rpx;
+}
+
+.timelineMeta {
+  display: block;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-bottom: 8rpx;
+}
+
+.timelineText {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+}
+
+.empty {
+  margin-top: 80rpx;
+  text-align: center;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  line-height: $line-height-loose;
+}

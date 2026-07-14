@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name="viewport" content="width=375,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no,address=no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>taro_template</title>
+    <script>
+      // 固定 html fontSize，防止 Taro 运行时脚本动态修改
+      // 锁定为 37.5px：匹配 designWidth=750 + baseFontSize=37.5 的 pxtransform 基准
+      // rootValue = baseFontSize / deviceRatio[designWidth] * 2 = 37.5 / 1 * 2 = 75
+      // 即 28rpx → 28/75 rem ≈ 0.373rem → 0.373 * 37.5px = 14px（正确还原 750 设计稿）
+      // PC 浏览器手机壳固定 375px 宽，37.5px 基准刚好对应 375px 屏宽
+      (function() {
+        var html = document.documentElement;
+        html.style.fontSize = '37.5px';
+        Object.defineProperty(html.style, 'fontSize', {
+          get: function() { return '37.5px'; },
+          set: function() { /* 忽略 Taro 运行时的动态修改 */ }
+        });
+      })();
+      <%= htmlWebpackPlugin.options.script %>
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

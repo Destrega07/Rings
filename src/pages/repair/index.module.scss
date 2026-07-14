@@ -1,0 +1,445 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  padding: $page-padding;
+  padding-bottom: 200rpx; // 给底部操作栏留位
+}
+
+.step {
+  display: none;
+  animation: fadeIn 0.4s $transition-base;
+  &.active { display: block; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16rpx); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.angelRow {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin: 24rpx 0;
+}
+
+.angelAvatar {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: radial-gradient(circle, $color-wood-glow 0%, $color-primary 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-sm;
+  color: $color-wood-deep;
+  font-weight: $font-weight-semibold;
+  box-shadow: 0 4rpx 12rpx rgba(255, 215, 142, 0.4);
+}
+
+.angelBubble {
+  flex: 1;
+  background: $color-bg-warm;
+  border-radius: $radius-md $radius-md $radius-md 4rpx;
+  padding: 20rpx 24rpx;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  line-height: $line-height-loose;
+  border: 2rpx solid rgba(184, 134, 92, 0.15);
+}
+
+.sectionTitle {
+  display: block;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin: 32rpx 0 16rpx;
+}
+
+.sectionHint {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  margin-bottom: 24rpx;
+  line-height: $line-height-loose;
+}
+
+/* 意图分流 */
+.intentGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+
+.intentCard {
+  background: $color-bg-card;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-lg;
+  padding: 32rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  transition: all $transition-base;
+
+  &:active {
+    background: $color-bg-warm;
+    border-color: $color-primary;
+    transform: scale(0.98);
+  }
+}
+
+.intentCardTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-primary-dark;
+}
+
+.intentCardDesc {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-normal;
+}
+
+/* 情绪卡片墙 */
+.emotionGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+
+.emotionChip {
+  @include button-reset;
+  padding: 16rpx 32rpx;
+  background: $color-bg-card;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-button;
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  min-width: 160rpx;
+  transition: all $transition-base;
+
+  &.active {
+    background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+    border-color: $color-primary-dark;
+    color: $color-text-white;
+    box-shadow: 0 4rpx 16rpx rgba(140, 98, 57, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+/* 多行输入 */
+.rawInput {
+  width: 100%;
+  min-height: 240rpx;
+  background: $color-bg-card;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-md;
+  padding: 24rpx;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  line-height: $line-height-loose;
+  box-sizing: border-box;
+  margin-top: 16rpx;
+}
+
+.rawCount {
+  display: block;
+  text-align: right;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: 8rpx;
+}
+
+/* 主按钮 */
+.btnPrimary {
+  @include button-reset;
+  width: 100%;
+  height: $button-height-lg;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+  border-radius: $radius-button;
+  color: $color-text-white;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  margin-top: 32rpx;
+  box-shadow: 0 6rpx 20rpx rgba(140, 98, 57, 0.3);
+
+  &:active { opacity: 0.9; transform: scale(0.98); }
+  &.disabled {
+    background: $color-text-disabled;
+    box-shadow: none;
+  }
+}
+
+.btnGhost {
+  @include button-reset;
+  width: 100%;
+  height: $button-height-md;
+  background: transparent;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-button;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  margin-top: 16rpx;
+
+  &:active { background: $color-bg-hover; }
+}
+
+/* 注入中 Loading */
+.loadingBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 0;
+}
+
+.loadingRing {
+  width: 120rpx;
+  height: 120rpx;
+  border: 6rpx solid rgba(184, 134, 92, 0.2);
+  border-top-color: $color-primary;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin-bottom: 24rpx;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loadingText {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+  text-align: center;
+}
+
+/* 渴望选项 */
+.desireList {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+
+.desireCard {
+  background: $color-bg-card;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-lg;
+  padding: 24rpx;
+  transition: all $transition-base;
+
+  &.active {
+    background: $color-bg-warm;
+    border-color: $color-primary;
+    box-shadow: 0 4rpx 16rpx rgba(184, 134, 92, 0.2);
+  }
+
+  &:active { transform: scale(0.98); }
+}
+
+.desireKey {
+  display: inline-block;
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  background: $color-primary;
+  color: $color-text-white;
+  border-radius: 50%;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  margin-right: 12rpx;
+  vertical-align: middle;
+}
+
+.desireText {
+  display: inline;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  line-height: $line-height-loose;
+  vertical-align: middle;
+}
+
+/* NVC 卡片 */
+.nvcCard {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: 32rpx 24rpx;
+  box-shadow: $shadow-card;
+  margin-top: 24rpx;
+  border: 2rpx solid $color-border;
+}
+
+.nvcField {
+  margin-bottom: 24rpx;
+  opacity: 0;
+  transform: translateY(8rpx);
+  transition: all 0.4s $transition-base;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nvcLabel {
+  display: block;
+  font-size: $font-size-xs;
+  color: $color-primary-dark;
+  font-weight: $font-weight-semibold;
+  margin-bottom: 8rpx;
+  letter-spacing: 2rpx;
+}
+
+.nvcText {
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  line-height: $line-height-loose;
+}
+
+.feelingTag {
+  display: inline-block;
+  padding: 2rpx 12rpx;
+  margin: 0 4rpx;
+  background: rgba(212, 146, 92, 0.15);
+  color: $color-warning;
+  border-radius: $radius-xs;
+  font-weight: $font-weight-medium;
+}
+
+/* 可编辑态提示 */
+.editHint {
+  display: block;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-bottom: 16rpx;
+  padding-bottom: 12rpx;
+  border-bottom: 2rpx dashed $color-divider;
+  line-height: $line-height-normal;
+}
+
+/* NVC 可编辑文本域 */
+.nvcTextarea {
+  width: 100%;
+  min-height: 80rpx;
+  background: $color-bg-warm;
+  border: 2rpx solid rgba(184, 134, 92, 0.25);
+  border-radius: $radius-sm;
+  padding: 16rpx 20rpx;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  line-height: $line-height-loose;
+  box-sizing: border-box;
+  transition: border-color $transition-base;
+
+  &:focus {
+    border-color: $color-primary;
+    background: $color-bg-card;
+  }
+}
+
+/* 对话微调组件 */
+.refineBox {
+  background: $color-bg-card;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-lg;
+  padding: 24rpx;
+  margin-top: 24rpx;
+  box-shadow: $shadow-card;
+}
+
+.refineTitle {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-primary-dark;
+  font-weight: $font-weight-semibold;
+  margin-bottom: 12rpx;
+  letter-spacing: 1rpx;
+}
+
+.refineInput {
+  width: 100%;
+  min-height: 72rpx;
+  background: $color-bg-warm;
+  border: 2rpx solid rgba(184, 134, 92, 0.2);
+  border-radius: $radius-md;
+  padding: 16rpx 20rpx;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  line-height: $line-height-loose;
+  box-sizing: border-box;
+  transition: border-color $transition-base;
+
+  &:focus {
+    border-color: $color-primary;
+  }
+}
+
+.refineButton {
+  @include button-reset;
+  width: 100%;
+  height: $button-height-md;
+  margin-top: 16rpx;
+  background: linear-gradient(135deg, $color-primary-light 0%, $color-primary 100%);
+  border-radius: $radius-button;
+  color: $color-text-white;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  box-shadow: 0 4rpx 12rpx rgba(184, 134, 92, 0.25);
+  transition: opacity $transition-base, transform $transition-base;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+
+  &.disabled {
+    background: $color-text-disabled;
+    box-shadow: none;
+  }
+}
+
+/* 底部固定操作栏 */
+.bottomBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24rpx $page-padding;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10rpx);
+  border-top: 2rpx solid $color-divider;
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.04);
+  z-index: 50;
+}
+
+/* 顶部进度指示 */
+.steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  margin: 16rpx 0 24rpx;
+}
+
+.dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: $color-divider;
+  transition: all $transition-base;
+
+  &.active {
+    background: $color-primary;
+    width: 32rpx;
+    border-radius: $radius-button;
+  }
+}
